@@ -8,10 +8,8 @@ export default createStore({
   state: {
     // 配置信息
     // 这里只包含了http协议和主机信息，没有包含请求的路径
-    // apiRequestPrefix: "http://localhost:8055/",
     apiRequestPrefix: "http://localhost:" + backendPort + "/",
     // 图片的路径信息
-    // imgSrcPrefix: "http://localhost:8055/api/image/",
     imgSrcPrefix: "http://localhost:" + backendPort + "/api/image/",
     // 全局通用信息
     user: {

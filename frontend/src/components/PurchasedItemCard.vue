@@ -55,7 +55,7 @@ export default {
       return (
         date.getFullYear() +
         "-" +
-        date.getMonth() +
+        (date.getMonth() + 1) +
         "-" +
         date.getDate() +
         " " +
