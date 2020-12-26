@@ -1,0 +1,12 @@
+**/.DS_Store
+
+**/node_modules/
+**/dist/
+**/package-lock.json
+**/pnpm-lock.yaml
+
+**/target/
+**/.idea/
+
+**/src/main/resources/templates/
+frontend/src/assets/

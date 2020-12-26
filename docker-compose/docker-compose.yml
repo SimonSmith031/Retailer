@@ -1,0 +1,39 @@
+# 目前的思路是，只在dockerfile中拷贝资源之类的，然后在这里写其他的
+version: '3'
+services:
+    java:
+        ports:
+            - "${JAVA_SERVER_PORT}:8055"
+        #expose:
+        #    - "8055"
+        build: ./java
+        environment:
+            #- JAVA_SERVER_PORT
+            - SPRING_DATASOURCE_USERNAME=root
+            - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
+            - SPRING_DATASOURCE_URL=jdbc:mysql://retailer-compose-mysql:3306/Retailer?useSSL=false&allowPublicKeyRetrieval=true
+        depends_on: 
+            - mysql
+        # 启动文件，jar运行时第一个参数是资源文件的路径
+        # 目前如果路径前后多了空格都不能正常识别
+        command: sh -c "java -jar /java/retailer.jar /java/assets"
+    mysql:
+        container_name: retailer-compose-mysql
+        # 只把端口暴露给compose内部服务
+        expose:
+            - "3306"
+        build: ./mysql
+        restart: "always"
+        environment:
+            - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+            - MYSQL_DATABASE=Retailer
+    nginx:
+        image: nginx
+        ports:
+            - "${NGINX_PORT}:8044"
+        build: ./nginx
+        environment:
+            #- NGINX_PORT
+            - JAVA_SERVER_PORT
+        depends_on: 
+            - java

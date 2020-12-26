@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.bookimage-long {
+    object-fit: cover;
+    height: 395px;
+    width: 300px;
+}
+
+.bookimage-short {
+    object-fit: cover;
+    height: 375px;
+    width: 300px;
+}
