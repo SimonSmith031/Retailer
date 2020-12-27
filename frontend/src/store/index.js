@@ -2,15 +2,22 @@ import { createStore } from "vuex";
 import axios from "axios";
 
 // 从环境中获取后端的端口号
-const backendPort = process.env.JAVA_SERVER_PORT ? process.env.JAVA_SERVER_PORT : 8092;
+const ENV_WRAPPER = {
+  JAVA_HOSTNAME: 'localhost',
+  JAVA_PORT: '8092'
+};
+// 虽然使用undefined的方式在console上算没有问题，但是浏览器算的居然是为错误……
+// const port = ENV_WRAPPER.JAVA_PORT;
+// // const hostname = typeof(ENV_WRAPPER.JAVA_HOSTNAME) != 'undefined' ? ENV_WRAPPER.JAVA_HOSTNAME : 'localhost';
+// const hostname = ENV_WRAPPER.JAVA_HOSTNAME;
+// const host = hostname + ":" + port;
 
 export default createStore({
   state: {
     // 配置信息
-    // 这里只包含了http协议和主机信息，没有包含请求的路径
-    apiRequestPrefix: "http://localhost:" + backendPort + "/",
+    apiRequestPrefix: "http://" + ENV_WRAPPER.JAVA_HOSTNAME + ":" + ENV_WRAPPER.JAVA_PORT + "/",
     // 图片的路径信息
-    imgSrcPrefix: "http://localhost:" + backendPort + "/api/image/",
+    imgSrcPrefix: "http://" + ENV_WRAPPER.JAVA_HOSTNAME + ":" + ENV_WRAPPER.JAVA_PORT + "/api/image/",
     // 全局通用信息
     user: {
       name: null, // 测试用，平时这个时候拿不到token

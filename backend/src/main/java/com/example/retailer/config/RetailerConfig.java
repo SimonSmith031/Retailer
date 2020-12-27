@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @MapperScan("com.example.retailer.dao")
-@ConfigurationProperties("custom")
 public class RetailerConfig {
 
     @Bean

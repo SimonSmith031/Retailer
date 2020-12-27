@@ -3,12 +3,9 @@ version: '3'
 services:
     java:
         ports:
-            - "${JAVA_SERVER_PORT}:8055"
-        #expose:
-        #    - "8055"
+            - "${JAVA_PORT}:8055"
         build: ./java
         environment:
-            #- JAVA_SERVER_PORT
             - SPRING_DATASOURCE_USERNAME=root
             - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
             - SPRING_DATASOURCE_URL=jdbc:mysql://retailer-compose-mysql:3306/Retailer?useSSL=false&allowPublicKeyRetrieval=true
@@ -23,7 +20,6 @@ services:
         expose:
             - "3306"
         build: ./mysql
-        restart: "always"
         environment:
             - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
             - MYSQL_DATABASE=Retailer
@@ -33,7 +29,7 @@ services:
             - "${NGINX_PORT}:8044"
         build: ./nginx
         environment:
-            #- NGINX_PORT
-            - JAVA_SERVER_PORT
+            - JAVA_PORT
+            - JAVA_HOSTNAME
         depends_on: 
             - java
