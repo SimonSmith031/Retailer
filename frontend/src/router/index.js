@@ -72,7 +72,7 @@ function commit() {
 }
 
 router.beforeEach((to, from, next) => {
-  console.log(to.path, from.path, "info: ", info);
+  console.log('to:', to.path, 'from:', from.path);
 
   // 清除过期的提示信息
   if (committed) {
@@ -87,7 +87,7 @@ router.beforeEach((to, from, next) => {
     to.path != "/" &&
     to.path != "/login"
   ) {
-    console.log("😅 trying to get to invalid page");
+    // console.log("trying to get to invalid page");
     info = {
       text: "若要进入该标签页，请先登录",
       color: "red",
@@ -103,7 +103,7 @@ router.beforeEach((to, from, next) => {
   }
 
   // 已经登录或者访问合法内容的时候
-  console.log("visiting a valid page! 🙋‍♂️");
+  // console.log("visiting a valid page! 🙋‍♂️");
   fetchResources(to.path);
   next();
   commit();
